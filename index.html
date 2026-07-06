@@ -300,7 +300,7 @@
 
                 </div>
 
-                <form id="expense-form">
+                <form id="expense-form"  autocomplete="off">
 
                     <!-- Title -->
 
@@ -389,14 +389,19 @@
                         <textarea id="expense-notes" rows="4" placeholder="Optional..."></textarea>
 
                     </div>
-                    <div class="edit-actions">
+                   
 
-                        <button id="updateBtn" type="button">
+                    <button id="add-btn" class="primary-btn" type="submit">
 
-                            <i class="fa-solid fa-floppy-disk"></i>
-                            Update Transaction
+                        <i class="fa-solid fa-plus"></i>
 
-                        </button>
+                        <span class="addtext">Add Transaction</span>
+
+                    </button>
+
+                     <div class="edit-actions">
+
+
 
                         <button id="cancel-btn" class="cancel-btn" type="button">
 
@@ -406,14 +411,6 @@
                         </button>
 
                     </div>
-
-                    <button id="add-btn" class="primary-btn" type="submit">
-
-                        <i class="fa-solid fa-plus"></i>
-
-                        Add Transaction
-
-                    </button>
 
                 </form>
 

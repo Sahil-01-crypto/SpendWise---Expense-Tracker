@@ -4,10 +4,16 @@ const amount = document.querySelector("#expense-amount");
 const category = document.querySelector("#expense-category");
 const date = document.querySelector("#expense-date");
 const textarea = document.querySelector("#expense-notes");
-const editAction = document.querySelector(".edit-actions")
-const updateBtn = document.querySelector(".updatebtn");
+const editAction = document.querySelector(".edit-actions");
+const addtext = document . querySelector(".addtext")
+
 const cancelBtn = document.querySelector(".cancel-btn")
 const addBtn = document.querySelector(".primary-btn");
+
+const clearAll = document.querySelector(".clear-btn");
+
+const toastContainer = document.querySelector("#toast-container")
+
 
 
 // Food Title Validation Regular Expression
@@ -24,9 +30,11 @@ let editId = null;
 form.addEventListener("submit", function (event) {
     event.preventDefault();
 
-console.log("Submit Event Fired");
 
-  
+  if( editId!= null){
+    updateTransaction();
+    return ;
+  }
 
     //     safety check for name 
     const itemName = title.value.trim();
@@ -47,6 +55,11 @@ console.log("Submit Event Fired");
     console.log(expense)
 
     saveToLocalStorage(expense);
+    toastNotification(
+    "Success",
+    "Transaction Added Successfully",
+    "success"
+);
     loadTransactions()
 
     form.reset();
@@ -201,15 +214,12 @@ function editItem(detail) {
     textarea.value = detail.note;
 
     editId = detail.id;
-    addBtn.style.display = "none"
-    editAction.style.display = "flex";
-
-
-
+   editAction.style.display ="block"
+    addtext.textContent="update Item"
 
 }
 
-updateBtn.addEventListener("click", updateTransaction);
+
 
 
 function updateTransaction() {
@@ -230,11 +240,16 @@ function updateTransaction() {
     localStorage.setItem("transaction", JSON.stringify(allTransaction));
 
     editId = null;
+    addtext.textContent="Add Transaction"
+     editAction.style.display = "none";
     form.reset();
 
-
-    addBtn.style.display = "block"
-    editAction.style.display = "none";
+toastNotification(
+    "Updated",
+    "Transaction Updated Successfully",
+    "info"
+);
+    
 
     loadTransactions();
 
@@ -243,7 +258,9 @@ function updateTransaction() {
 
  cancelBtn.addEventListener("click", function () {
         form.reset();
+        addtext.textContent="Add Transaction"
         addBtn.style.display = "block"
+       
         editAction.style.display = "none";
         editId = null;
     })
@@ -255,7 +272,56 @@ function deleteItem(id) {
     })
     localStorage.setItem("transaction", JSON.stringify(newTransaction));
 
+    toastNotification(
+    "Deleted",
+    "Transaction Removed",
+    "error"
+);
+
     loadTransactions();
+}
+
+
+clearAll.addEventListener("click",function(){
+
+    const isConfirmed = confirm(
+        "Are you sure you want to delete all transactions?"
+    ); 
+    if(!isConfirmed)return 
+
+
+    localStorage.removeItem("transaction");
+    loadTransactions();
+})
+
+
+function toastNotification(info , data  , type ){
+    const toast = document.createElement("div");
+    toast.classList.add("toast" , type);
+
+    const h3 = document.createElement("H3")
+    h3.textContent=info ;
+
+    const  p = document.createElement("p")
+    p.textContent =data ;
+
+    toast.appendChild(h3);
+    toast.appendChild(p);
+    toastContainer.appendChild(toast);
+setTimeout(() => {
+
+    toast.classList.add("hide");
+
+    setTimeout(() => {
+
+        toast.remove();
+
+    },350);
+
+},3000);
+
+
+
 }
 
 

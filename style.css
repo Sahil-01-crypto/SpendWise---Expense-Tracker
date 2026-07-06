@@ -1040,6 +1040,131 @@ a{
 
 }
 
+/*====================================
+            TOAST CONTAINER
+=====================================*/
+
+#toast-container{
+
+    position:fixed;
+
+    top:20px;
+
+    right:20px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:15px;
+
+    z-index:9999;
+
+}
+/*====================================
+                TOAST
+=====================================*/
+
+.toast{
+
+    width:330px;
+
+    background:#ffffff;
+
+    border-left:6px solid #22c55e;
+
+    border-radius:12px;
+
+    padding:16px 20px;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.15);
+
+    animation:slideIn .35s ease;
+
+}
+.toast h3{
+
+    font-size:1rem;
+
+    color:#111827;
+
+    margin-bottom:6px;
+
+}
+.toast p{
+
+    color:#6B7280;
+
+    font-size:.92rem;
+
+    line-height:1.5;
+
+}
+.toast.success{
+
+    border-left-color:#22C55E;
+
+}
+.toast.error{
+
+    border-left-color:#EF4444;
+
+}
+.toast.warning{
+
+    border-left-color:#F59E0B;
+
+}
+.toast.info{
+
+    border-left-color:#3B82F6;
+
+}
+@keyframes slideIn{
+
+    from{
+
+        transform:translateX(120%);
+
+        opacity:0;
+
+    }
+
+    to{
+
+        transform:translateX(0);
+
+        opacity:1;
+
+    }
+
+}
+.toast.hide{
+
+    animation:slideOut .35s ease forwards;
+
+}
+
+@keyframes slideOut{
+
+    from{
+
+        transform:translateX(0);
+
+        opacity:1;
+
+    }
+
+    to{
+
+        transform:translateX(120%);
+
+        opacity:0;
+
+    }
+
+}
+
 /*====================================================
                 RESPONSIVE
 =====================================================*/
