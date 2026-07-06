@@ -90,7 +90,6 @@ While building this project, I learned:
 
 **Sahil Kumar  Singh**
 
-GitHub: https://github.com/your-github-username
 
 ---
 
